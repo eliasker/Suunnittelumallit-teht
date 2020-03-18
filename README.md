@@ -1,2 +1,3 @@
-# Suunnittelumallit-teht
+# Suunnittelumallit
 Suunnittelumallit -kurssin tehtävät
+1) FactoryMethod
