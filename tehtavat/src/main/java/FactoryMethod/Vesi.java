@@ -1,9 +1,9 @@
 package FactoryMethod;
 
-public class Vesi implements Juoma{
+public class Vesi implements Juoma {
 
-    public String toString(){
-        return "vesi";
-    }
+  public String toString() {
+    return "vesi";
+  }
 
 }
