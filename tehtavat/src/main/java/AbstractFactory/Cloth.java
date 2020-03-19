@@ -5,7 +5,6 @@ public class Cloth {
   private String brand;
 
   /**
-   * 
    * @param type of cloth, hat or shoes for example
    * @param brand of that cloth, comes from a specified factory so all clothes are matching
    */

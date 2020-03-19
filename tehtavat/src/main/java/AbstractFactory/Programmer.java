@@ -15,6 +15,9 @@ public class Programmer {
     return this.name;
   }
 
+  /**
+   * Prints current outfit
+   */
   public void flex() {
     String outfit = "I'm currently wearing (flex flex):\n";
     for (Cloth c : clothes)
@@ -22,6 +25,11 @@ public class Programmer {
     System.out.println(outfit + "\n");
   }
 
+  /**
+   * Old clothes are removed and new ones are added from a factory.
+   * The type of new clothing is defined with String type
+   * @param factory Concrete factory extending abstract factory. Depending on the type of factory
+   */
   public void wear(AbstractClothesFactory factory) {
     clothes.clear();
     clothes.add(factory.getCloth("hat"));

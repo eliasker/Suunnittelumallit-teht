@@ -1,5 +1,8 @@
 package AbstractFactory;
 
+/**
+ * Factory making Boss -clothes
+ */
 public class BossFactory extends AbstractClothesFactory {
   @Override
   Cloth getCloth(String clothType) {

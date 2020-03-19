@@ -1,5 +1,8 @@
 package AbstractFactory;
 
+/**
+ * Factory making Adidas -clothes
+ */
 public class GopnikFactory extends AbstractClothesFactory {
   @Override
   Cloth getCloth(String clothType) {
