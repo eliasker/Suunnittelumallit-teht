@@ -2,14 +2,6 @@ package Composite;
 
 public class Main {
   public static void main(String[] args) {
-    /* TODO:
-     * Hyvän mielen bonus:
-     * 
-     * Esitä, kuinka voit luoda kaikki tuoteosat abstraktin tehtaan avulla. Esitä
-     * myös, kuinka konkreettista tehdasta vaihtamalla saat helposti lasketuksi eri
-     * tehtaiden tuottamien samanlaisten kokoonpanojen hintoja.
-     */
-
     Koostekomponentti kotelo = new Koostekomponentti("kotelo", 50);
     Koostekomponentti emolevy = new Koostekomponentti("emolevy", 100);
     kotelo.add(emolevy);
