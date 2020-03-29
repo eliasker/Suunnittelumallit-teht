@@ -1,6 +1,13 @@
 package Observer;
 
-public class ClockTimer {
+import java.util.Observable;
+
+/**
+ * ClockTimer on konkreettinen subjekti, joka sisältää ajan muuttujat (tarkkailtava tila).
+ * tick() -metodi päivittää aika yhdellä sekunilla ja ilmoittaa tarkkailijoille tilan muutoksesta.
+ * timeToString() -metodi palauttaa ajan merkkijonona hh:mm:ss -muodossa.
+ */
+public class ClockTimer extends Observable {
   private int seconds;
   private int minutes;
   private int hours;
@@ -33,9 +40,11 @@ public class ClockTimer {
         hours++;
       }
     }
+    setChanged();
+    notifyObservers(timeToString());
   }
-
-  public String getTime() {
+  
+  public String timeToString() {
     String secondsString = seconds < 10 ? "0" + getSeconds() : "" + getSeconds();
     String minutesString = minutes < 10 ? "0" + getMinutes() : "" + getMinutes();
     String hoursString = hours < 10 ? "0" + getHours() : "" + getHours();
