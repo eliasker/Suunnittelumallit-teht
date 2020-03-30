@@ -1,0 +1,1 @@
+5.	Singleton: Mieti jokin konkreettinen sovellustilanne, jossa Singleton-mallista olisi hyötyä. Esitä sovelluksen toteutus Javalla. Ks. toteutusvihjeet wikipedasta. Voit esim. toteuttaa abstraktin tehtaan singletonina. Voit hyödyntää lisäksi reflektiota.
