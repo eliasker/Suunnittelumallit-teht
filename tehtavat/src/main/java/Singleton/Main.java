@@ -1,8 +1,9 @@
 package Singleton;
 
-// Utility containg methods for reading user input: int, char, double, line
+// Utility containg methods for reading user input such as: int, char, double, line
 import util.Read;
 
+// Simple text-UI in console for writing logs
 public class Main {
   public static void main(String[] args) {
     char input;

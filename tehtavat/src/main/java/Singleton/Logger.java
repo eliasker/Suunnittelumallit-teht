@@ -1,18 +1,30 @@
 package Singleton;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Logger class that can be used to write and read lines to/from a log -file
+ */
 public class Logger {
   private String PATH;
   private static Logger INSTANCE;
 
+  /**
+   * Private Logger constructor. Tries to find or create "logs.txt" -file by
+   * comparing temp -file exists in same directory as Logger.java. If not
+   * "logs.txt" -file is created
+   */
   private Logger() {
     String filename = "logs.txt";
-    PATH = System.getProperty("user.dir") + "\\tehtavat\\src\\main\\java\\Singleton";
-    String filePath = PATH + "\\" + filename;
-    System.out.println("to:" + filePath);
-    File temp = new File(filePath);
+    PATH = System.getProperty("user.dir") + "\\tehtavat\\src\\main\\java\\Singleton\\" + filename; // :DDDDD
+    // String filePath = PATH + "\\" + filename;
+    System.out.println("to:" + PATH);
+    File temp = new File(PATH);
     if (temp.exists()) {
       System.out.println("Found logs.txt -file");
     } else {
@@ -33,10 +45,31 @@ public class Logger {
   }
 
   public void write(String log) {
-    System.out.println("Writing " + log);
+    System.out.println("Writing to logs.txt: " + log);
+    BufferedWriter writer;
+    try {
+      writer = new BufferedWriter(new FileWriter(PATH, true));
+      writer.write(log);
+      writer.newLine();
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void read() {
-    System.out.println("Reading log");
+    System.out.println("Content of logs.txt:");
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader(PATH));
+      String line = reader.readLine();
+      while (line != null) {
+        System.out.println(line);
+        line = reader.readLine();
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
