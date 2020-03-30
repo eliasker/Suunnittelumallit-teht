@@ -1,6 +1,5 @@
 package Singleton;
 
-import java.net.URL;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,8 +19,7 @@ public class Logger {
       System.out.println("Couldn't find path to resource, creating new log file");
       try {
         temp.createNewFile();
-        System.out.println("Created");
-      } catch (Exception e) {// catch (IOException e) {
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }
@@ -32,5 +30,13 @@ public class Logger {
       INSTANCE = new Logger();
     }
     return INSTANCE;
+  }
+
+  public void write(String log) {
+    System.out.println("Writing " + log);
+  }
+
+  public void read() {
+    System.out.println("Reading log");
   }
 }
