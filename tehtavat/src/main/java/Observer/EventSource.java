@@ -3,37 +3,26 @@ package Observer;
 public class EventSource extends Thread {
   private ClockTimer timer;
   private int DELAY;
-  private boolean changedDelay;
 
   public EventSource(ClockTimer timer) {
     this.timer = timer;
-    DELAY = 1000;
-    changedDelay = false;
+    this.DELAY = 1000;
   }
 
   @Override
   public void run() {
-    while (!changedDelay) {
+    while (true) {
       try {
         sleep(DELAY);
         timer.tick();
-        if (timer.getSeconds() > 10 && changedDelay == false) {
+        if (timer.getSeconds() > 9 && DELAY == 1000) {
           System.out.println("Ajan rakenne on muuttunut.");
           sleep(DELAY);
-          changedDelay = true;
           DELAY = 10;
+        }
+        if (timer.getHours() > 2) {
           break;
         }
-      } catch (Exception e) {
-        System.out.println(e);
-      }
-    }
-    while (changedDelay) {
-      try {
-        sleep(DELAY);
-        timer.tick();
-        if (timer.getHours() >= 2)
-          break;
       } catch (Exception e) {
         System.out.println(e);
       }
