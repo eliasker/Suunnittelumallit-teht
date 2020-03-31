@@ -5,23 +5,26 @@ import util.Read;
 
 public class Main {
   public static void main(String[] args) {
-    TextHandler textHandler = new TextHandler();
+    // TextHandler handler = new TextHandler();
+    EncryptionDecorator handler = new EncryptionDecorator(new TextHandler());
     char input;
     do {
-      System.out.println("1 write to file\t2 print file\t3 quit");
+      System.out.println("1 write to file\t2 print file\t3 clear file\t4 quit");
       input = Read.character();
       switch (input) {
         case '1':
-          textHandler.write(Read.line());
+          handler.write(Read.line());
           break;
         case '2':
-          textHandler.read();
+          handler.read();
           break;
         case '3':
+          handler.clear();
+          break;
+        case '4':
           System.out.println("Quitting program");
           break;
       }
-    } while (input != '3');
-
+    } while (input != '4');
   }
 }

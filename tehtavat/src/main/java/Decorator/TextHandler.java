@@ -2,31 +2,20 @@ package Decorator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class TextHandler implements ITextHandler {
-  private String PATH;
-  private String filename = "secret.txt";
-
   public TextHandler() {
-    PATH = System.getProperty("user.dir") + "\\tehtavat\\src\\main\\java\\Decorator\\" + filename; // :DDDDD
-    File temp = new File(PATH);
-    if (!temp.exists())
-      try {
-        temp.createNewFile();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
   }
 
   @Override
   public void read() {
     BufferedReader reader;
     try {
-      reader = new BufferedReader(new FileReader(PATH));
+      String path = FileManager.getInstance().getPath();
+      reader = new BufferedReader(new FileReader(path));
       String line = reader.readLine();
       while (line != null) {
         System.out.println(line);
@@ -42,9 +31,23 @@ public class TextHandler implements ITextHandler {
   public void write(String str) {
     BufferedWriter writer;
     try {
-      writer = new BufferedWriter(new FileWriter(PATH, true));
+      String path = FileManager.getInstance().getPath();
+      writer = new BufferedWriter(new FileWriter(path, true));
       writer.write(str);
       writer.newLine();
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public void clear() {
+    BufferedWriter writer;
+    try {
+      String path = FileManager.getInstance().getPath();
+      writer = new BufferedWriter(new FileWriter(path));
+      writer.write("");
       writer.close();
     } catch (IOException e) {
       e.printStackTrace();

@@ -14,4 +14,8 @@ public abstract class AbstractTextHandler implements ITextHandler {
   public void write(String str) {
     textHandler.write(str);
   }
+
+  public void clear() {
+    textHandler.clear();
+  }
 }
