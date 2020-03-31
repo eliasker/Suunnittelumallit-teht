@@ -22,8 +22,6 @@ public class Logger {
   private Logger() {
     String filename = "logs.txt";
     PATH = System.getProperty("user.dir") + "\\tehtavat\\src\\main\\java\\Singleton\\" + filename; // :DDDDD
-    // String filePath = PATH + "\\" + filename;
-    System.out.println("to:" + PATH);
     File temp = new File(PATH);
     if (temp.exists()) {
       System.out.println("Found logs.txt -file");

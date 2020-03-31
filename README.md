@@ -5,3 +5,5 @@ Suunnittelumallit -kurssin tehtävien palautusrepo
 3) Composite
 4) Observer
 5) Singleton
+6) Decorator
+7) State
