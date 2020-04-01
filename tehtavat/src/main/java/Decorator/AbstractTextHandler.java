@@ -1,5 +1,7 @@
 package Decorator;
 
+import java.util.ArrayList;
+
 public abstract class AbstractTextHandler implements ITextHandler {
   protected TextHandler textHandler;
 
@@ -13,6 +15,10 @@ public abstract class AbstractTextHandler implements ITextHandler {
 
   public void write(String str) {
     textHandler.write(str);
+  }
+
+  public ArrayList<String> getLines() {
+    return textHandler.getLines();
   }
 
   public void clear() {

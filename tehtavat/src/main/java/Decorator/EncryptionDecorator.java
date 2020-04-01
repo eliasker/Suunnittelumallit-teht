@@ -1,10 +1,11 @@
 package Decorator;
 
+import java.util.ArrayList;
+
 /**
- * Konkreettinen
+ * 
  */
 public class EncryptionDecorator extends AbstractTextHandler {
-  private TextHandler textHandler;
   private char currentChar;
   private int KEY = 13;
 
@@ -14,50 +15,56 @@ public class EncryptionDecorator extends AbstractTextHandler {
 
   @Override
   public void read() {
-    String strFromFile = "this text is encrypted";
-    String decryptedStr = decrypt(strFromFile);
-    System.out.println("read");
+    // String strFromFile = "this text is encrypted";
+    // String decryptedStr = decrypt(strFromFile);
+    // System.out.println("read");
+
   }
 
   @Override
   public void write(String str) {
-    System.out.println("write");
     String encryptedStr = encrypt(str);
-    System.out.println(encryptedStr);
+    System.out.println("Encrypting " + str + " to: " + encryptedStr);
+    super.write(encryptedStr);
   }
 
+  // Jokaisella ASCII -merkillä on on numeerinen vastinen (ASCII table)
+  // Kirjainta vastaavaan desimaalilukuun lisäätään avain (int KEY).
+  // Summa muunnetaan characteriksi ja tallennetaan palautettavaan merkkijonoon
+  // Merkkien alaraja 32 on välilyönti ja yläraja 126 '~' -merkki
+  // Metodi tekee jokaiselle merkkijonon merkille saman operaation
   private String encrypt(String str) {
     String encryptedStr = "";
-    System.out.println("encrypting: " + str);
+    int MIN = 32;
+    int MAX = 126;
     for (int i = 0; i < str.length(); i++) {
       currentChar = str.charAt(i);
-
-      if (currentChar >= 'a' && currentChar <= 'z') {
-        currentChar = (char) (currentChar + KEY);
-        if (currentChar > 'z') {
-          currentChar = (char) (currentChar - 'z' + 'a' - 1);
-        }
-        encryptedStr += currentChar;
-      } else if (currentChar >= 'A' && currentChar <= 'Z') {
-        currentChar = (char) (currentChar + KEY);
-        if (currentChar > 'Z') {
-          currentChar = (char) (currentChar - 'Z' + 'A' - 1);
-        }
-        encryptedStr += currentChar;
-      } else {
-        encryptedStr += currentChar;
-      }
+      currentChar += KEY;
+      if (currentChar > MAX)
+        currentChar = (char) (MIN + (currentChar - MAX - 1));
+      encryptedStr += currentChar;
     }
     return encryptedStr;
   }
 
-  private String decrypt(String str) {
-    System.out.println("decrypting: " + str);
-    return str;
+  private ArrayList<String> decrypt(ArrayList<String> lines) {
+    ArrayList<String> decryptedLines = new ArrayList<>();
+    for (String line : lines) {
+      // TODO: decrypt
+      decryptedLines.add(line);
+    }
+
+    return decryptedLines;
   }
 
   @Override
   public void clear() {
-    System.out.println("clearing");
+    System.out.println("file cleared");
   }
+
+  @Override
+  public ArrayList<String> getLines() {
+    return super.getLines();
+  }
+
 }

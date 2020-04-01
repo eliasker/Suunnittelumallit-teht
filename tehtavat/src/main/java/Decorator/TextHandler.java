@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TextHandler implements ITextHandler {
   public TextHandler() {
@@ -52,6 +53,24 @@ public class TextHandler implements ITextHandler {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public ArrayList<String> getLines() {
+    ArrayList<String> lines = new ArrayList<>();
+    BufferedReader reader;
+    try {
+      String path = FileManager.getInstance().getPath();
+      reader = new BufferedReader(new FileReader(path));
+      String line = reader.readLine();
+      while (line != null) {
+        lines.add(line);
+      }
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return lines;
   }
 
 }
