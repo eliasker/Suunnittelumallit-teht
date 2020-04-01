@@ -7,10 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Konkreettinen komponentti
 public class TextHandler implements ITextHandler {
   public TextHandler() {
   }
 
+  // Tulostaa tiedoston rivit
   @Override
   public void read() {
     BufferedReader reader;
@@ -28,6 +30,7 @@ public class TextHandler implements ITextHandler {
     }
   }
 
+  // Kirjoittaa uuden rivin tiedostoon.
   @Override
   public void write(String str) {
     BufferedWriter writer;
@@ -42,6 +45,7 @@ public class TextHandler implements ITextHandler {
     }
   }
 
+  // Korvaa tiedoston tekstin tyhjällä merkillä
   @Override
   public void clear() {
     BufferedWriter writer;
@@ -55,6 +59,7 @@ public class TextHandler implements ITextHandler {
     }
   }
 
+  // Palauttaa listan tiedostosta luetuista riveistä
   @Override
   public ArrayList<String> getLines() {
     ArrayList<String> lines = new ArrayList<>();
@@ -65,6 +70,7 @@ public class TextHandler implements ITextHandler {
       String line = reader.readLine();
       while (line != null) {
         lines.add(line);
+        line = reader.readLine();
       }
       reader.close();
     } catch (IOException e) {
@@ -72,5 +78,4 @@ public class TextHandler implements ITextHandler {
     }
     return lines;
   }
-
 }

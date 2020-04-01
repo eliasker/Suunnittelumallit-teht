@@ -2,6 +2,7 @@ package Decorator;
 
 import java.util.ArrayList;
 
+// Decorator, viite komponenttiin (TextHandler)
 public abstract class AbstractTextHandler implements ITextHandler {
   protected TextHandler textHandler;
 

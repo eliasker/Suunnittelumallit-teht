@@ -2,25 +2,34 @@ package Decorator;
 
 import java.util.ArrayList;
 
-/**
- * 
- */
+// Concrete decorator, lisäominaisuudet komponenttiin
+// Tässä tapauksessa tiedostoon kirjoitus/luku, with a twist:
+// Caesarin salakirjoitus ASCII -merkeillä
 public class EncryptionDecorator extends AbstractTextHandler {
-  private char currentChar;
-  private int KEY = 13;
+  private int KEY = 100; // Salauksen avain
+  private int MIN = 32; // ASCII ' ' -merkkiä vastaava desimaaliluku
+  private int MAX = 126; // ASCII '~' -merkkiä vastaava desimaaliluku
+  private int curr; // Apumuuttuja merkkiä vastaavalle desimaaliluvulle
 
   public EncryptionDecorator(TextHandler textHandler) {
     super(textHandler);
   }
 
+  // Kutsuu parent -classin getLines(), hakee luettavat rivit tiedostosta
   @Override
-  public void read() {
-    // String strFromFile = "this text is encrypted";
-    // String decryptedStr = decrypt(strFromFile);
-    // System.out.println("read");
-
+  public ArrayList<String> getLines() {
+    return super.getLines();
   }
 
+  @Override
+  public void read() {
+    for (String encryptedLine : getLines()) {
+      System.out.println("decrypted line: " + decrypt(encryptedLine));
+    }
+  }
+
+  // Lähettää merkkijonon salattavaksi Jonka jälkeen kutsuu vanhemman
+  // tiedostoonkirjoitus metodia
   @Override
   public void write(String str) {
     String encryptedStr = encrypt(str);
@@ -28,43 +37,37 @@ public class EncryptionDecorator extends AbstractTextHandler {
     super.write(encryptedStr);
   }
 
-  // Jokaisella ASCII -merkillä on on numeerinen vastinen (ASCII table)
+  // Jokaisella ASCII -merkillä on on numeerinen vastinen (ks. ASCII table)
   // Kirjainta vastaavaan desimaalilukuun lisäätään avain (int KEY).
-  // Summa muunnetaan characteriksi ja tallennetaan palautettavaan merkkijonoon
-  // Merkkien alaraja 32 on välilyönti ja yläraja 126 '~' -merkki
+  // Summaa vastaava uusi merkki tallennetaan salattun merkkijonoon
+  // Käytössä luvut MIN ja MAX väliltä, jos SUM > MAX --> käytetään ylijäämää
   // Metodi tekee jokaiselle merkkijonon merkille saman operaation
+  // SUM > MAX laskussa tarvitaan -1 ensimmäiseen alkioon pääsyksi
   private String encrypt(String str) {
     String encryptedStr = "";
-    int MIN = 32;
-    int MAX = 126;
     for (int i = 0; i < str.length(); i++) {
-      currentChar = str.charAt(i);
-      currentChar += KEY;
-      if (currentChar > MAX)
-        currentChar = (char) (MIN + (currentChar - MAX - 1));
-      encryptedStr += currentChar;
+      curr = str.charAt(i) + KEY;
+      if (curr > MAX)
+        curr = curr - MAX + MIN - 1;
+      encryptedStr += (char) curr;
     }
     return encryptedStr;
   }
 
-  private ArrayList<String> decrypt(ArrayList<String> lines) {
-    ArrayList<String> decryptedLines = new ArrayList<>();
-    for (String line : lines) {
-      // TODO: decrypt
-      decryptedLines.add(line);
+  // Sama kuin yllä, mutta toisinpäin :D
+  private String decrypt(String encryptedString) {
+    String decryptedString = "";
+    for (int i = 0; i < encryptedString.length(); i++) {
+      curr = encryptedString.charAt(i) - KEY;
+      if (curr < MIN)
+        curr = MAX - MIN + curr + 1;
+      decryptedString += (char) curr;
     }
-
-    return decryptedLines;
+    return decryptedString;
   }
 
   @Override
   public void clear() {
-    System.out.println("file cleared");
+    super.clear();
   }
-
-  @Override
-  public ArrayList<String> getLines() {
-    return super.getLines();
-  }
-
 }
