@@ -1,0 +1,1 @@
+8.	Template Method: Game.java:ssa oleva Template Method -malliin perustuva kehys  määrittelee yleisen pelin kulun. Toteuta siihen perustuen jokin yksinkertainen toimiva peli.
