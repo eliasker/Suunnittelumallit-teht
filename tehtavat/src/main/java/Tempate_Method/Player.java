@@ -3,23 +3,23 @@ package Tempate_Method;
 public class Player {
   private String name;
   private boolean isAI;
-  private String choice;
+  private int choice;
 
   public Player(String name, boolean isAI) {
     this.name = name;
     this.isAI = isAI;
-    this.choice = null;
+    this.choice = -1;
   }
 
   public boolean isAI() {
     return isAI;
   }
 
-  public String getChoice() {
+  public int getChoice() {
     return choice;
   }
 
-  public void setChoice(String choice) {
+  public void setChoice(int choice) {
     this.choice = choice;
   }
 
