@@ -7,3 +7,7 @@ Suunnittelumallit -kurssin tehtävien palautusrepo
 5) Singleton
 6) Decorator
 7) State
+8) Template Method
+9) Strategy
+10) Chain of Responsibility
+11) Memento
