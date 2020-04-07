@@ -6,7 +6,7 @@ import java.util.ArrayList;
 // Tässä tapauksessa tiedostoon kirjoitus/luku, with a twist:
 // Caesarin salakirjoitus ASCII -merkeillä
 public class EncryptionDecorator extends AbstractTextHandler {
-  private int KEY = 100; // Salauksen avain
+  private int KEY = 80; // Salauksen avain
   private int MIN = 32; // ASCII ' ' -merkkiä vastaava desimaaliluku
   private int MAX = 126; // ASCII '~' -merkkiä vastaava desimaaliluku
   private int curr; // Apumuuttuja merkkiä vastaavalle desimaaliluvulle
