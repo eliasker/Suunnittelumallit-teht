@@ -22,11 +22,10 @@ public class Arvuuttaja {
     arvaaja.setMemento(new Memento(arvaaja.getNimi(), getUusiLuku()));
   }
 
-  public boolean arvaus(Object obj) {
+  public boolean arvaus(Object obj, int luku) {
     Memento memento = (Memento) obj;
-    int arvattuLuku = getUusiLuku();
-    System.out.println(memento.getNimi() + " arvasi: " + arvattuLuku);
-    return memento.getArvattava() == getUusiLuku();
+    System.out.println(memento.getNimi() + " arvasi: " + luku + " (oikeasti: " + memento.getArvattava() + ")");
+    return memento.getArvattava() == luku;
   }
 
   public int getUusiLuku() {
