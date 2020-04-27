@@ -1,6 +1,6 @@
 package Prototype;
 
-public class Clock {
+public class Clock implements Cloneable {
   private Pointer minutes;
   private Pointer hours;
 
@@ -28,5 +28,19 @@ public class Clock {
 
   public String getTime() {
     return hours.getNumber() + ":" + minutes.getNumber();
+  }
+
+  @Override
+  public Object clone() {
+    Clock clone= null;
+
+    try {
+      clone = (Clock) super.clone();
+    } catch (CloneNotSupportedException e) {
+      System.out.println("Exception cloning");
+      clone = new Clock();
+    }
+
+    return clone;
   }
 }
