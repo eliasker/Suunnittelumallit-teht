@@ -30,17 +30,23 @@ public class Clock implements Cloneable {
     return hours.getNumber() + ":" + minutes.getNumber();
   }
 
+  public int getMinutes() {
+    return minutes.getNumber();
+  }
+
+  public int getHours() {
+    return hours.getNumber();
+  }
+
   @Override
   public Object clone() {
     Clock clone= null;
-
     try {
       clone = (Clock) super.clone();
     } catch (CloneNotSupportedException e) {
       System.out.println("Exception cloning");
       clone = new Clock();
     }
-
     return clone;
   }
 }

@@ -1,5 +1,6 @@
 package Prototype;
 
+// Viisari
 public class Pointer {
   private int number;
 
