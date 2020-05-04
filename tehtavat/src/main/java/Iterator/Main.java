@@ -8,13 +8,9 @@ public class Main {
   public static void main(String[] args) {
     ArrayList<String> arr = new ArrayList<>(Arrays.asList("eka", "toka", "kolmas", "neljäs", "viides", "kuudes",
         "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"));
-    test1(arr);
-    //test2(arr);
-    /*
-    test3(arr);
-    test4(arr);
-    */
-
+    // test1(arr);
+    // test2(arr);
+    // test3(arr);
   }
 
   // Kokoelman iterointi kahdella samanaikaisella säikeellä
@@ -35,18 +31,21 @@ public class Main {
     System.out.println("Test case 2:");
     ListIterator<String> iterator = arr.listIterator();
 
-    ThreadIterator th1 = new ThreadIterator("Säie 1", iterator);
-    ThreadIterator th2 = new ThreadIterator("Säie 2", iterator);
-    th1.start();
-    th2.start();
+    ThreadIterator thread1 = new ThreadIterator("Säie 1", iterator);
+    ThreadIterator thread2 = new ThreadIterator("Säie 2", iterator);
+    thread1.start();
+    thread2.start();
   }
 
   // Kokoelmaan tehdään muutoksia iteroinnin läpikäynnin aikana
   static void test3(ArrayList<String> arr) {
     System.out.println("Test case 3:");
+    ListIterator<String> iterator = arr.listIterator();
+    EditingThreadIterator thread1 = new EditingThreadIterator("Edit1", iterator);
+    thread1.start();
+
   }
 
-  // TODO
   static void test4(ArrayList<String> arr) {
     System.out.println("Test case 4:");
   }
