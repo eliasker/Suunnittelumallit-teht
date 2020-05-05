@@ -3,15 +3,16 @@ package Iterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListIterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
   public static void main(String[] args) {
     ArrayList<String> arr = new ArrayList<>(Arrays.asList("eka", "toka", "kolmas", "neljäs", "viides", "kuudes",
         "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"));
-    // test1(arr);
+     test1(arr);
     // test2(arr);
-     test3(arr);
-    //test4(arr);
+    // test3(arr);
+    // test4(arr);
   }
 
   // Kokoelman iterointi kahdella samanaikaisella säikeellä
@@ -55,5 +56,17 @@ public class Main {
 
   static void test4(ArrayList<String> arr) {
     System.out.println("Test case 4:");
+    CopyOnWriteArrayList<String> arr2 = new CopyOnWriteArrayList<>();
+    ListIterator<String> iterator1 = arr.listIterator();
+    while (iterator1.hasNext())
+      arr2.add(iterator1.next());
+
+    ListIterator<String> iterator2 = arr2.listIterator();
+    ListIterator<String> iterator3 = arr2.listIterator();
+    ThreadIterator th1 = new ThreadIterator("iter", iterator2);
+    EditingThreadIterator th2 = new EditingThreadIterator("edit", iterator2);
+
+    new Thread(th1).start();
+    new Thread(th2).start();
   }
 }
