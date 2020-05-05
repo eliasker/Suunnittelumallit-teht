@@ -2,7 +2,7 @@ package Iterator;
 
 import java.util.ListIterator;
 
-public class EditingThreadIterator extends Thread {
+public class EditingThreadIterator implements Runnable {
   private ListIterator<String> iter;
   private String name;
 
@@ -13,14 +13,20 @@ public class EditingThreadIterator extends Thread {
 
   @Override
   public void run() {
-    int i = 0;
-    while (iter.hasNext()) {
-      System.out.println(name + ": " + iter.next());
-      if (i < 1) {
-        System.out.println("Lisätään arvo");
-        iter.add("lisätty arvo " + i);
+    try {
+      int i = 0;
+      while (iter.hasNext()) {
+        System.out.println(name + ": " + iter.next());
+        // iter.add lisää arvon next() -metodilla saatavan jälkeen
+        if (i == 4) {
+          System.out.println("Lisätään arvo");
+          iter.add("lisätty arvo " + i);
+          System.out.println(iter.previous());
+        }
         i++;
       }
+    } catch (Exception e) {
+      System.out.println(e);
     }
   }
 }

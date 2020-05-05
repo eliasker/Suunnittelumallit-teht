@@ -2,7 +2,7 @@ package Iterator;
 
 import java.util.ListIterator;
 
-public class ThreadIterator extends Thread {
+public class ThreadIterator implements Runnable {
   private ListIterator<String> iter;
   private String name;
 
@@ -13,9 +13,13 @@ public class ThreadIterator extends Thread {
 
   @Override
   public void run() {
-    while (iter.hasNext()) {
-      System.out.println(name + ": " + iter.next());
+    try {
+      while (iter.hasNext()) {
+        System.out.println(name + ": " + iter.next());
+      }
+    } catch (Exception e) {
+      System.out.println(e);
     }
   }
-  
+
 }

@@ -10,7 +10,8 @@ public class Main {
         "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"));
     // test1(arr);
     // test2(arr);
-    // test3(arr);
+     test3(arr);
+    //test4(arr);
   }
 
   // Kokoelman iterointi kahdella samanaikaisella säikeellä
@@ -19,20 +20,22 @@ public class Main {
     System.out.println("Test case 1:");
     ListIterator<String> iterator1 = arr.listIterator();
     ListIterator<String> iterator2 = arr.listIterator();
-
-    ThreadIterator th1 = new ThreadIterator("Säie 1", iterator1);
-    ThreadIterator th2 = new ThreadIterator("Säie 2", iterator2);
-    th1.start();
-    th2.start();
+    ThreadIterator th1 = new ThreadIterator("Eka", iterator1);
+    ThreadIterator th2 = new ThreadIterator("Toka", iterator2);
+    Thread thread1 = new Thread(th1);
+    Thread thread2 = new Thread(th2);
+    thread1.start();
+    thread2.start();
   }
 
   // Kokoelman iterointi kahdella vuorottelevalla säikeellä
   static void test2(ArrayList<String> arr) {
     System.out.println("Test case 2:");
     ListIterator<String> iterator = arr.listIterator();
-
-    ThreadIterator thread1 = new ThreadIterator("Säie 1", iterator);
-    ThreadIterator thread2 = new ThreadIterator("Säie 2", iterator);
+    ThreadIterator th1 = new ThreadIterator("Eka", iterator);
+    ThreadIterator th2 = new ThreadIterator("Toka", iterator);
+    Thread thread1 = new Thread(th1);
+    Thread thread2 = new Thread(th2);
     thread1.start();
     thread2.start();
   }
@@ -40,10 +43,14 @@ public class Main {
   // Kokoelmaan tehdään muutoksia iteroinnin läpikäynnin aikana
   static void test3(ArrayList<String> arr) {
     System.out.println("Test case 3:");
-    ListIterator<String> iterator = arr.listIterator();
-    EditingThreadIterator thread1 = new EditingThreadIterator("Edit1", iterator);
+    ListIterator<String> iterator1 = arr.listIterator();
+    ListIterator<String> iterator2 = arr.listIterator();
+    ThreadIterator th1 = new ThreadIterator("Iter", iterator1);
+    EditingThreadIterator th2 = new EditingThreadIterator("Edit", iterator2);
+    Thread thread1 = new Thread(th1);
+    Thread thread2 = new Thread(th2);
     thread1.start();
-
+    thread2.start();
   }
 
   static void test4(ArrayList<String> arr) {
